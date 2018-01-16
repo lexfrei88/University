@@ -1,0 +1,1 @@
+${param.subjectId}; ${param.score}; ${subjectIdError}; ${scoreError}; ${certificate.id}

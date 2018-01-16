@@ -1,0 +1,75 @@
+form {
+    padding: 30px;
+    width: 80%;
+    margin: auto;
+}
+
+.login-form {
+    padding: 10px;
+    margin: 15px;
+    height: 300px;
+    width: 250px;
+    background-color: rgba(46, 32, 32, 0.5);
+}
+
+.register-form {
+    margin: 20px auto auto;
+    width: 50%;
+    background-color: rgba(46, 32, 32, 0.5);
+}
+
+label {
+    color: #ead295;
+}
+
+input {
+    box-sizing: border-box;
+    outline: none;
+    padding: 6px;
+    margin: 8px 0;
+    width: 100%;
+    border: none;
+    background-color: rgba(68, 57, 57, 0.6);
+    color: #ead295;
+}
+
+
+input:focus {
+    border: 3px solid #a8a8a8;
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(205, 18, 18, 1);
+    color: black;
+    width: 100%;
+    font-weight: bold;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: green;
+}
+
+input:invalid:not(:placeholder-shown) {
+    border-color: red;
+}
+input:invalid:not(:placeholder-shown) ~ .error-msg {
+    display: block;
+}
+
+
+@media (max-width: 620px) {
+    .login-form {
+        width: 80%;
+        margin: 20px auto auto;
+        background-color: rgba(46, 32, 32, 0.9);
+    }
+
+    .register-form {
+        width: 90%;
+        margin: 20px auto auto;
+    }
+
+    input {
+        background-color: rgba(88, 88, 88, 0.75);
+    }
+}

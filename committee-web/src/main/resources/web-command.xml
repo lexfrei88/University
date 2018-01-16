@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+    <command method="GET">
+        <path>/login</path>
+        <className>by.epam.selection.web.command.LoginGetCommand</className>
+    </command>
+    <command method="GET">
+        <path>/register</path>
+        <className>by.epam.selection.web.command.RegisterGetCommand</className>
+    </command>
+    <command method="POST">
+        <path>/login</path>
+        <className>by.epam.selection.web.command.LoginPostCommand</className>
+    </command>
+    <command method="GET">
+        <path>/logout</path>
+        <className>by.epam.selection.web.command.LogoutGetCommand</className>
+    </command>
+    <command method="POST">
+        <path>/register</path>
+        <className>by.epam.selection.web.command.RegisterPostCommand</className>
+    </command>
+    <command method="GET">
+        <path>/user/faculty</path>
+        <className>by.epam.selection.web.command.FacultyGetCommand</className>
+    </command>
+    <command method="POST">
+        <path>/user/faculty</path>
+        <className>by.epam.selection.web.command.FacultyPostCommand</className>
+    </command>
+    <command method="GET">
+        <path>/admin/approve</path>
+        <className>by.epam.selection.web.command.AdminMenuGetCommand</className>
+    </command>
+    <command method="POST">
+        <path>/admin/approve</path>
+        <className>by.epam.selection.web.command.AdminMenuPostCommand</className>
+    </command>
+
+    <command method="GET">
+        <path>/admin/choose</path>
+        <className>by.epam.selection.web.command.AdminChooseGetCommand</className>
+    </command>
+    <command method="GET">
+        <path>/admin/select</path>
+        <className>by.epam.selection.web.command.AdminSelectGetCommand</className>
+    </command>
+
+    <command method="POST">
+        <path>/user/ajax/certificate</path>
+        <className>by.epam.selection.web.command.ajax.CertificatePostAjaxCommand</className>
+    </command>
+</commands>

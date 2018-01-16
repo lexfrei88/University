@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" charset="UTF-8" />
+        </Console>
+
+        <File name="File" fileName="C:/by/epam/selection-committee/log/selection-committee.log">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" charset="UTF-8" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name= "by.epam.selection" level="debug" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console" />
+        </Logger>
+
+         <!--Root Logger -->
+        <Root level="all">
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

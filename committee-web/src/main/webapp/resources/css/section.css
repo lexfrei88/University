@@ -1,0 +1,16 @@
+section {
+  width: 980px;
+  margin: auto;
+}
+
+@media (max-width: 980px) {
+  section {
+    width: 100%;
+  }
+}
+
+p,
+h1 {
+  text-align: center;
+  color: #ead295;
+}

@@ -1,0 +1,60 @@
+@media (max-width: 680px) {
+    ul {
+        width: 100%;
+    }
+
+    ul li:not(#collapsed-menu) {
+        display: none;
+        transition: all .5s;
+        opacity: 0;
+    }
+
+    li:not(#collapsed-menu), li.dropdown {
+        display: none;
+        float: none;
+        clear: both;
+    }
+
+    li a, .dropbtn {
+        display: block;
+        float: none;
+    }
+
+    ul li:hover {
+        background: #ccc;
+    }
+
+    label[for="collapse"] {
+        display: inline-block;
+        padding: 10px;
+        margin-left: 20px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+
+    input[type="checkbox"] {
+        visibility: hidden;
+    }
+
+    label > div {
+        width: 25px;
+        margin-top: 5px;
+        padding: 1px;
+        background-color: #ead295;
+    }
+
+    #collapse:checked ~ li {
+        opacity: 1;
+        display: block;
+    }
+
+    #collapse:checked + label:before {
+        opacity: 0.5;
+    }
+
+    .dropdown-content {
+        margin: auto;
+        width: 100%;
+    }
+}

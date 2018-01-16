@@ -1,0 +1,32 @@
+section {
+    text-align: center;
+    padding: 40px;
+    width: 60%;
+    margin: auto;
+}
+
+table {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #aaa;
+    text-align: left;
+}
+
+tr:hover {
+    color: white;
+    background: #999;
+}
+
+.check-icon {
+    background-image: url(../img/check.png);
+    background-repeat:no-repeat;
+    background-size: contain;
+    padding: 10px;
+    cursor: pointer;
+}

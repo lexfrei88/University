@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+    <beans>
+        <bean id="connectionPool" class="by.epam.selection.dao.connection.ConnectionPoolImpl" init-method="create">
+            <method-param name="driverName" value="com.mysql.cj.jdbc.Driver"/>
+            <method-param name="maxTotal" value="1"/>
+            <method-param name="maxWaitMillis" value="5000"/>
+            <method-param name="url" value="jdbc:mysql://localhost:3306/selection_committee?useSSL=false"/>
+            <method-param name="userName" value="root"/>
+            <method-param name="password" value="root"/>
+        </bean>
+
+        <bean id="connectionHolder" class="by.epam.selection.dao.connection.ConnectionHolderImpl">
+            <constructor-arg ref="connectionPool"/>
+        </bean>
+
+        <bean id="jdbcTemplate" class="by.epam.selection.dao.template.JdbcTemplate">
+            <constructor-arg ref="connectionHolder"/>
+        </bean>
+
+        <bean id="certificateDao" class="by.epam.selection.dao.CertificateDaoImpl">
+            <constructor-arg ref="jdbcTemplate"/>
+        </bean>
+
+        <bean id="facultyDao" class="by.epam.selection.dao.FacultyDaoImpl">
+            <constructor-arg ref="jdbcTemplate"/>
+        </bean>
+
+        <bean id="userDao" class="by.epam.selection.dao.UserDaoImpl">
+            <constructor-arg ref="jdbcTemplate"/>
+        </bean>
+
+        <bean id="userValid" class="by.epam.selection.validation.UserValidator"/>
+
+        <bean id="userService" class="by.epam.selection.service.UserServiceImpl">
+            <constructor-arg ref="userDao"/>
+        </bean>
+
+        <bean id="certificateValidator" class="by.epam.selection.validation.CertificateValidator"/>
+
+        <bean id="certificateService" class="by.epam.selection.service.CertificateServiceImpl">
+            <constructor-arg ref="certificateDao"/>
+        </bean>
+
+        <bean id="facultyService" class="by.epam.selection.service.FacultyServiceImpl">
+            <constructor-arg ref="facultyDao"/>
+        </bean>
+    </beans>
+</context>
