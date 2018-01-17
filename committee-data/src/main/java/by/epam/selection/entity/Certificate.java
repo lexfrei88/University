@@ -67,7 +67,8 @@ public class Certificate extends BaseEntity {
     @Override
     public String toString() {
         return "Certificate{" +
-                "subject=" + subject +
+                "ID=" + getId() +
+                ", subject=" + subject +
                 ", score=" + score +
                 '}';
     }

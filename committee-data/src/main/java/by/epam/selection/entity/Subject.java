@@ -55,7 +55,8 @@ public class Subject extends BaseEntity {
     @Override
     public String toString() {
         return "Subject{" +
-                "subjectName='" + subjectName + '\'' +
+                "ID=" + getId() +
+                ", subjectName='" + subjectName + '\'' +
                 '}';
     }
 

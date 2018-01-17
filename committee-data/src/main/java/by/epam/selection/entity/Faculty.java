@@ -63,4 +63,13 @@ public class Faculty extends BaseEntity {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "ID=" + getId() +
+                ", facultyName='" + facultyName + '\'' +
+                ", studentLimit=" + studentLimit +
+                "}";
+    }
+
 }

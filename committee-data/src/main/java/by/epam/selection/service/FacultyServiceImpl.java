@@ -3,6 +3,7 @@ package by.epam.selection.service;
 import by.epam.selection.dao.FacultyDao;
 import by.epam.selection.dao.exception.DaoException;
 import by.epam.selection.entity.Faculty;
+import by.epam.selection.service.exception.NotFoundException;
 import by.epam.selection.service.exception.ServiceException;
 
 import java.util.List;
@@ -29,11 +30,17 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty get(long facultyId) throws ServiceException {
+        Faculty faculty;
         try {
-            return facultyDao.get(facultyId);
-        } catch (DaoException e) {
+            faculty = facultyDao.get(facultyId);
+            if (faculty == null) {
+                String msg = "Faculty not found with id = " + facultyId;
+                throw new NotFoundException(msg);
+            }
+        } catch (DaoException | NotFoundException e) {
             throw new ServiceException(e.getMessage(), e);
         }
+        return faculty;
     }
 
 }

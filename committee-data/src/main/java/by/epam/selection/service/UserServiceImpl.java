@@ -102,12 +102,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthenticatedUser loadUserByUsername(String email, String password) throws ServiceException {
-        AuthenticatedUser authenticatedUser = null;
+        AuthenticatedUser authenticatedUser;
         try {
             User user = userDao.getByEmail(email);
-            if (user != null) {
-                authenticatedUser = login(user, password);
-            }
+            authenticatedUser = login(user, password);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
