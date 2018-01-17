@@ -44,10 +44,10 @@ public class ContextBuilder {
             } else {
                 instantiateByMethodWithParams(contextMap, key, beanData);
             }
-        } else if (beanData.getConstructorArgs() == null) {
-            instantiateByDefaultConstructor(contextMap, key, beanData);
-        } else {
+        } else if (beanData.getConstructorArgs() != null) {
             instantiateByConstructorWithParams(contextMap, key, beanData, beanDataMap);
+        } else {
+            instantiateByDefaultConstructor(contextMap, key, beanData);
         }
     }
 
@@ -69,10 +69,10 @@ public class ContextBuilder {
             for (int i = 0; i < beanData.getMethodParams().size(); i++) {
                 paramsTypesList.add(String.class);
             }
-            Class<String>[] paramsTypesArray = paramsTypesList.toArray(new Class[paramsTypesList.size()]);
+            Class[] paramsTypesArray = paramsTypesList.toArray(new Class[paramsTypesList.size()]);
             Method initMethod = clazz.getMethod(beanData.getInitMethod(), paramsTypesArray);
             List<String> methodParamsList = beanData.getMethodParams();
-            String[] args = methodParamsList.toArray(new String[methodParamsList.size()]);
+            Object[] args = methodParamsList.toArray(new String[methodParamsList.size()]);
             Object obj = initMethod.invoke(null, args);
             contextMap.put(key, obj);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {

@@ -2,7 +2,6 @@ package by.epam.selection.dao.template;
 
 import by.epam.selection.dao.connection.ConnectionHolder;
 import by.epam.selection.dao.exception.DaoException;
-import by.epam.selection.dao.exception.DataIntegrityViolationException;
 import by.epam.selection.dao.template.extractor.ListResultSetExtractor;
 import by.epam.selection.dao.template.extractor.ResultSetExtractor;
 import by.epam.selection.dao.template.extractor.SingleRowResultSetExtractor;
@@ -15,7 +14,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 /**
@@ -46,8 +44,6 @@ public class JdbcTemplate implements JdbcOperation {
                     id = generatedKeys.getLong(1);
                 }
             }
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw new DataIntegrityViolationException(e.getMessage(), e);
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         } finally {

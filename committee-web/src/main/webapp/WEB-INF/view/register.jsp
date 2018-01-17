@@ -35,6 +35,9 @@
                 <span data-error="${not empty emailError}" class="error-msg">
                     <fmt:message bundle="${i18n}" key="error.email"/>
                 </span>
+                <span data-error="${not empty duplicatedEmail}" class="error-msg">
+                    ${duplicatedEmail}
+                </span>
             </label>
             <label for="password">
                 <fmt:message bundle="${i18n}" key="label.password"/>

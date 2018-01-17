@@ -2,6 +2,7 @@ package by.epam.selection.dao.tx;
 
 import by.epam.selection.dao.connection.Transactional;
 import by.epam.selection.dao.exception.DaoException;
+import by.epam.selection.service.exception.ServiceException;
 import by.epam.study.application.ApplicationContext;
 import by.epam.study.application.SimpleClassPathXmlApplicationContext;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,7 @@ public class TxAspect {
     public void tx() {}
 
     @Around("tx()")
-    public Object transaction(ProceedingJoinPoint pjp) throws DaoException {
+    public Object transaction(ProceedingJoinPoint pjp) throws ServiceException {
         logger.info("Begin tx.");
 
         ApplicationContext context = SimpleClassPathXmlApplicationContext.getInstance();
@@ -38,8 +39,13 @@ public class TxAspect {
         } catch (Throwable throwable) {
             logger.debug("Tx rollback.");
 
-            transactional.rollbackTx();
-            throw new DaoException(throwable);
+            try {
+                transactional.rollbackTx();
+            } catch (DaoException e) {
+                throw new ServiceException(throwable.getMessage(), throwable);
+            }
+
+            throw new ServiceException(throwable.getMessage(), throwable);
         } finally {
             logger.debug("Connection close.");
             try {

@@ -1,6 +1,5 @@
 package by.epam.selection.web.command;
 
-import by.epam.selection.dao.exception.DataIntegrityViolationException;
 import by.epam.selection.entity.User;
 import by.epam.selection.exception.WrongParameterException;
 import by.epam.selection.service.UserService;
@@ -19,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Set;
 
 /**
@@ -28,6 +28,10 @@ import java.util.Set;
 public class RegisterPostCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(RegisterPostCommand.class);
+
+    private static final String EMAIL_UNIQUE_INDEX_NAME = "idx_unique_user_email";
+    private static final String DUPLICATED_EMAIL_MSG = "Email already exist.";
+    private static final String DUPLICATED_EMAIL_ATTRIBUTE = "duplicatedEmail";
 
     private static final String FIRST_NAME_PARAMETER = "firstName";
     private static final String LAST_NAME_PARAMETER = "lastName";
@@ -74,10 +78,14 @@ public class RegisterPostCommand implements Command {
                 logger.debug("New user has been created.");
                 view = REDIRECT_TO_LOGIN_COMMAND;
             } catch (ServiceException e) {
-                throw new ServletException(e.getMessage(), e);
-            } catch (DataIntegrityViolationException e) {
-                request.setAttribute("duplicatedEmail", "Email already exist");
-                view = FORWARD_TO_REGISTER_PAGE;
+                Throwable root = WebUtils.getExceptionRootCause(e);
+                String msg = root.getMessage();
+                if (root instanceof SQLIntegrityConstraintViolationException && msg.contains(EMAIL_UNIQUE_INDEX_NAME)) {
+                    request.setAttribute(DUPLICATED_EMAIL_ATTRIBUTE, DUPLICATED_EMAIL_MSG);
+                    view = FORWARD_TO_REGISTER_PAGE;
+                } else {
+                    throw new ServletException(e.getMessage(), e);
+                }
             }
         } else {
             for (ConstraintViolation violation : violations) {
