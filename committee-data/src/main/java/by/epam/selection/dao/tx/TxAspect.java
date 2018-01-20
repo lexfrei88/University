@@ -15,7 +15,10 @@ import org.aspectj.lang.annotation.Pointcut;
 import java.sql.SQLException;
 
 /**
- * Created by lex on 12/15/2017.
+ * Current aspect serve the annotation {@link Transaction}.
+ *
+ * @author Alex Aksionchik 12/15/2017
+ * @version 1.0
  */
 @Aspect
 public class TxAspect {

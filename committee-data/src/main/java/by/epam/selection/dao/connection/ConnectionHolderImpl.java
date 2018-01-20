@@ -6,6 +6,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
+ * Implementation of {@link ConnectionHolder} and {@link Transactional} interfaces.
+ *
+ * Serve the connection lifecycle during the request and support operations in transaction mode.
+ *
  * @author Alex Aksionchik 12/3/2017
  * @version 1.0
  */

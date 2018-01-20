@@ -6,7 +6,7 @@ import java.sql.Connection;
  * Connection pool that keep the number of connections with database.
  *
  * @author Alex Aksionchik 12/5/2017
- * @version 0.1
+ * @version 1.0
  */
 public interface ConnectionPool {
 
@@ -28,4 +28,5 @@ public interface ConnectionPool {
      * Closing all connections in pool. Should be invoked during the application stop.
      */
     void destroy();
+
 }

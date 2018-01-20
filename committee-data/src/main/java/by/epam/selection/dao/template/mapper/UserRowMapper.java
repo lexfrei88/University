@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by lex on 12/15/2017.
+ * Map a single row of the {@link ResultSet} to the {@link User} object
+ *
+ * @author Alex Aksionchik 12/15/2017
+ * @version 1.0
  */
 public class UserRowMapper implements RowMapper<User> {
 

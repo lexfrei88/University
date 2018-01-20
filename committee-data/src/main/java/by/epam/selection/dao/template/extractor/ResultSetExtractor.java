@@ -14,7 +14,7 @@ public interface ResultSetExtractor<T> {
      * Extract data from {@link ResultSet} and transform them in into an object.
      *
      * @param resultSet from what should be retrieved data.
-     * @return object full with data from resultSet
+     * @return object full with data from resultSet or {@code null} if no rows returned as result of SQL request
      * @throws SQLException could be occur during read from result set.
      */
     T extractData(ResultSet resultSet) throws SQLException;

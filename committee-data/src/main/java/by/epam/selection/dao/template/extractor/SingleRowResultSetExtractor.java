@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by lex on 12/16/2017.
+ * Extract the first row from {@link ResultSet} and transform it to the entity
+ *
+ * @author Alex Aksionchik 12/16/2017
+ * @version 1.0
  */
 public class SingleRowResultSetExtractor<T> implements ResultSetExtractor<T> {
 

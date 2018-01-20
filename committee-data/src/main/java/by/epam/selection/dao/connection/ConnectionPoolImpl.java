@@ -17,14 +17,16 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Implementation of {@link ConnectionPool} interface.
+ *
  * @author Alex Aksionchik 12/19/2017
- * @version 0.1
+ * @version 1.0
  */
 public class ConnectionPoolImpl implements ConnectionPool {
 
     private static final Logger logger = LogManager.getLogger(ConnectionPoolImpl.class);
 
-    private static final String DB_PROPERTIES_FILE_PATH = "/db.xml";
+    private static final String DEFAULT_DB_PROPERTIES_FILE_PATH = "/db.xml";
 
     private static final String DRIVER_NAME_PROPERTY = "driverName";
     private static final String URL_PROPERTY = "url";
@@ -41,10 +43,22 @@ public class ConnectionPoolImpl implements ConnectionPool {
         this.properties = properties;
     }
 
+    /**
+     * Factory method that create ConnectionPool instance from properties file from classpath that have
+     * name {@code db.xml}
+     *
+     * @return ConnectionPool instance
+     */
     public static ConnectionPoolImpl create() {
-        return create(DB_PROPERTIES_FILE_PATH);
+        return create(DEFAULT_DB_PROPERTIES_FILE_PATH);
     }
 
+    /**
+     * Factory method that create ConnectionPool instance from specified properties file from classpath
+     *
+     * @param dbPropertiesFilePath - path to properties file from classpath
+     * @return ConnectionPool instance
+     */
     public static ConnectionPoolImpl create(String dbPropertiesFilePath) {
         BlockingQueue<Connection> connectionPool;
         Properties properties;
@@ -67,6 +81,17 @@ public class ConnectionPoolImpl implements ConnectionPool {
         return new ConnectionPoolImpl(connectionPool, properties);
     }
 
+    /**
+     * Factory method that create ConnectionPool instance with parameters passed by method signature.
+     *
+     * @param driverName    - SQL driver name
+     * @param maxTotal      - max amount of connection in the pool
+     * @param maxWaitMillis - max time to wait for connection while connecting
+     * @param url           - path to the database
+     * @param userName      - login to connect to the database
+     * @param password      - password to the database
+     * @return ConnectionPool instance
+     */
     public static ConnectionPoolImpl create(String driverName, String maxTotal, String maxWaitMillis, String url, String userName, String password) {
         BlockingQueue<Connection> connectionPool;
         Properties properties = buildProperties(driverName, maxTotal, maxWaitMillis, url, userName, password);

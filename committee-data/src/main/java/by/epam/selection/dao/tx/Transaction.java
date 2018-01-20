@@ -6,7 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by lex on 12/15/2017.
+ * This annotation is used to make method on a service layer work in transaction mode
+ *
+ * {@see by.epam.selection.dao.tx.TxAspect}
+ *
+ * @author Alex Aksionchik 12/15/2017
+ * @version 1.0
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.METHOD)

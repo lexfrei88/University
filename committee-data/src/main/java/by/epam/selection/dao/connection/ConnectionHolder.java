@@ -10,6 +10,7 @@ import java.sql.SQLException;
  * @version 1.0
  */
 public interface ConnectionHolder {
+
     /**
      * Receive connection with database for request.
      *
@@ -21,4 +22,5 @@ public interface ConnectionHolder {
      * Release connection after all operations during the request are complete.
      */
     void close() throws SQLException;
+
 }

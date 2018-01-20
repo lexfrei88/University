@@ -17,7 +17,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by lex on 12/13/2017.
+ * Implementation of {@link JdbcOperation} interface. Base class for DAO implementation.
+ *
+ * @author Alex Aksionchik 12/13/2017
+ * @version 1.0
  */
 public class JdbcTemplate implements JdbcOperation {
 

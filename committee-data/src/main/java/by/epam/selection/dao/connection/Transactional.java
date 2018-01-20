@@ -33,4 +33,5 @@ public interface Transactional {
      * Release connection after all operations during the transaction are complete.
      */
     void close() throws SQLException;
+
 }

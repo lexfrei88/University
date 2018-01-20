@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lex on 12/14/2017.
+ * Extract all rows from the {@link ResultSet} and transform them into List of entities
+ *
+ * @author Alex Aksionchik 12/14/2017
+ * @version 1.0
  */
 public class ListResultSetExtractor<T> implements ResultSetExtractor<List<T>> {
 

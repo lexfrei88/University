@@ -9,8 +9,10 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
+ * Extract credential data for {@link User} entity such as ID, Password and Roles.
  *
- * Created by lex on 12/27/2017.
+ * @author Alex Aksionchik 12/27/2017
+ * @version 1.0
  */
 public class CredentialExtractor implements ResultSetExtractor<User> {
 
