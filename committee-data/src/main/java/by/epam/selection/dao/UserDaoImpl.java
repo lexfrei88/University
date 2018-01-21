@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Implementation of {@link UserDao} interface based on custom {@link JdbcTemplate} class
+ *
  * @author Alex Aksionchik 12/3/2017
- * @version 0.1
+ * @version 1.0
  */
 public class UserDaoImpl implements UserDao {
 
@@ -107,6 +109,7 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.update(UPDATE_APPROVE_STATUS, userId) > 0;
     }
 
+    @Override
     public List<User> getAllSelected(long facultyId, int studentLimit) throws DaoException {
         logger.info("Select all new student for faculty.");
 

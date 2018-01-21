@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Util class for DAO layer.
+ *
  * @author Alex Aksionchik 12/3/2017
- * @version 0.1
+ * @version 1.0
  */
 public final class DaoUtils {
 

@@ -10,8 +10,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
+ * Implementation of {@link CertificateDao} interface based on custom {@link JdbcTemplate} class
+ *
  * @author Alex Aksionchik 12/5/2017
- * @version 0.1
+ * @version 1.0
  */
 public class CertificateDaoImpl implements CertificateDao {
 
@@ -24,7 +26,7 @@ public class CertificateDaoImpl implements CertificateDao {
                     "INNER JOIN subject AS sub ON sub.subject_id = fs.subject_id " +
                     "WHERE u.user_id = ?";
     private static final String INSERT_CERTIFICATE = "INSERT INTO user_certificate (user_id, subject_id, score) VALUES (?, ?, ?)";
-    private static final String UPDATE_CERTIFICATE = "UPDATE user_certificate SET score = ? WHERE certificate_id = ?";
+    private static final String UPDATE_CERTIFICATE = "UPDATE user_certificate SET score = ? WHERE certificate_id = ? AND user_id = ?";
 
     private static final CertificateRowMapper CERTIFICATE_ROW_MAPPER = new CertificateRowMapper();
 
@@ -58,8 +60,8 @@ public class CertificateDaoImpl implements CertificateDao {
     public Certificate update(Certificate certificate, long userId) throws DaoException {
         int score = certificate.getScore();
         Long id = certificate.getId();
-        jdbcTemplate.update(UPDATE_CERTIFICATE, score, id);
-        return certificate;
+        int affectedRows = jdbcTemplate.update(UPDATE_CERTIFICATE, score, id, userId);
+        return affectedRows > 0 ? certificate : null;
     }
 
 }

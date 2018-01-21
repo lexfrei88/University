@@ -23,8 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Main Servlet from Front Controller Pattern implementation.
+ *
  * @author Alex Aksionchik 11/23/2017
- * @version 0.1
+ * @version 1.0
  */
 public class FrontController extends HttpServlet {
 

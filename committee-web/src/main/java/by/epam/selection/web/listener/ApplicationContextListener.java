@@ -8,7 +8,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * Created by lex on 12/13/2017.
+ * Listener that do all necessary preparations during start up and shut down application
+ *
+ * @author Alex Aksionchik 12/13/2017
+ * @version 1.0
  */
 public class ApplicationContextListener implements ServletContextListener {
 

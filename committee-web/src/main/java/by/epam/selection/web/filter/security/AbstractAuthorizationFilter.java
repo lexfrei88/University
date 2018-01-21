@@ -27,6 +27,9 @@ import java.util.Set;
  * to protect and add for it init params with any name, but the value must
  * be equals to roles names from enum class {@link Role} you wish to have access
  * for specified url.
+ *
+ * @author Alex Aksionchik 12/27/2017
+ * @version 1.0
  */
 public abstract class AbstractAuthorizationFilter implements Filter {
 

@@ -3,7 +3,10 @@ package by.epam.selection.service.exception;
 import by.epam.selection.exception.SelectionCommitteeException;
 
 /**
- * Created by lex on 12/17/2017.
+ * Exception that could be thrown on a Service Layer.
+ *
+ * @author Alex Aksionchik 12/17/2017
+ * @version 1.0
  */
 public class ServiceException extends SelectionCommitteeException {
 

@@ -9,8 +9,10 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
+ * Filter that set {@code UTF-8} character encoding for request and response.
+ *
  * @author Alex Aksionchik 12/6/2017
- * @version 0.1
+ * @version 1.0
  */
 public class CharacterEncodingFilter implements Filter {
 

@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by lex on 12/27/2017.
+ * Filter cover the part that is available only for Users that are Authenticated.
+ *
+ * @author Alex Aksionchik 12/27/2017
+ * @version 1.0
  */
 public class AuthenticationFilter implements Filter {
 

@@ -6,7 +6,10 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * Created by lex on 12/27/2017.
+ * Class for security purposes. Contains User's Id and Roles.
+ *
+ * @author Alex Aksionchik 12/27/2017
+ * @version 1.0
  */
 public class AuthenticatedUser {
 

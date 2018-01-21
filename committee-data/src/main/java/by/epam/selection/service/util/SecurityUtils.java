@@ -5,13 +5,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by lex on 12/27/2017.
+ * Util class for security purposes.
+ *
+ * @author Alex Aksionchik 12/27/2017
+ * @version 1.0
  */
-public final class DigestUtils {
+public final class SecurityUtils {
 
     private static final String ALGORITHM = "MD5";
 
-    private DigestUtils() {}
+    private SecurityUtils() {}
 
     public static String md5Hex(String password) {
         String hash;

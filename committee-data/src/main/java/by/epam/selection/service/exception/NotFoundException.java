@@ -3,7 +3,10 @@ package by.epam.selection.service.exception;
 import by.epam.selection.exception.SelectionCommitteeException;
 
 /**
- * Created by lex on 12/13/2017.
+ * Exception that could be thrown if entity not found
+ *
+ * @author Alex Aksionchik 12/13/2017
+ * @version 1.0
  */
 public class NotFoundException extends SelectionCommitteeException {
 

@@ -10,8 +10,10 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
+ * Filter that process static resources bypassing front controller
+ *
  * @author Alex Aksionchik 12/7/2017
- * @version 0.1
+ * @version 1.0
  */
 public class ResourcesFilter implements Filter {
 

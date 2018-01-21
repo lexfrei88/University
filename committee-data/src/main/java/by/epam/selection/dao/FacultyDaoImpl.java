@@ -10,8 +10,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
+ * Implementation of {@link FacultyDao} interface based on custom {@link JdbcTemplate} class
+ *
  * @author Alex Aksionchik 12/9/2017
- * @version 0.1
+ * @version 1.0
  */
 public class FacultyDaoImpl implements FacultyDao {
 

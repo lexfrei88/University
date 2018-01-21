@@ -9,7 +9,7 @@ import by.epam.selection.entity.User;
 import by.epam.selection.service.exception.NotFoundException;
 import by.epam.selection.service.exception.ServiceException;
 import by.epam.selection.AuthenticatedUser;
-import by.epam.selection.service.util.DigestUtils;
+import by.epam.selection.service.util.SecurityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -116,7 +116,7 @@ public class UserServiceImpl implements UserService {
         Long userId = user.getId();
         Set<Role> roles = user.getRoles();
         String userPassword = user.getPassword();
-        String passwordHash = DigestUtils.md5Hex(password);
+        String passwordHash = SecurityUtils.md5Hex(password);
         return passwordHash.equalsIgnoreCase(userPassword) ? new AuthenticatedUser(userId, roles) : null;
     }
 
