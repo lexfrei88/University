@@ -1,7 +1,10 @@
 package by.epam.selection.exception;
 
 /**
- * Created by lex on 1/7/2018.
+ * Exception that thrown when illegal parameter passed from client to a server
+ *
+ * @author Alex Aksionchik 1/7/2018
+ * @version 1.0
  */
 public class WrongParameterException extends SelectionCommitteeException {
 

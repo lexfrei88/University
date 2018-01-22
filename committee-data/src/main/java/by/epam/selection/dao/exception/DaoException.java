@@ -3,7 +3,7 @@ package by.epam.selection.dao.exception;
 import by.epam.selection.exception.SelectionCommitteeException;
 
 /**
- * Exception that wrap any exception that occur or logically thrown on DAO layer.
+ * Exception that wrap any exception that occur or logically should be thrown on DAO layer.
  *
  * @author Alex Aksionchik 12/3/2017
  * @version 1.0

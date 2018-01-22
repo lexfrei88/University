@@ -1,7 +1,7 @@
 package by.epam.selection.dao.exception;
 
 /**
- * Exception that could be occur during initialization of the connection poll.
+ * Exception that could be occur during initialization or working of the connection poll.
  * <p>
  * <b>WARNING!</b> There's no reason to execute application if that exception occur, because that mean
  * you don't have normal Connection Pool or Connection to database.

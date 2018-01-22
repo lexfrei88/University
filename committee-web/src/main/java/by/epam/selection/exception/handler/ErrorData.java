@@ -1,7 +1,10 @@
 package by.epam.selection.exception.handler;
 
 /**
- * Created by lex on 1/7/2018.
+ * Object that contains data about handled exception and some addition data.
+ *
+ * @author Alex Aksionchik 1/7/2018
+ * @version 1.0
  */
 public class ErrorData {
 

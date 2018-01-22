@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Context that contain Map of commands for the one Front Controller Servlet
+ *
  * @author Alex Aksionchik 12/5/2017
- * @version 0.1
+ * @version 1.0
  */
 public class WebContext {
 

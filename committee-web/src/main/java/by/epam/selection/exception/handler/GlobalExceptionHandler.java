@@ -7,9 +7,15 @@ import by.epam.selection.util.WebUtils;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by lex on 1/7/2018.
+ *
+ * Implementation of the {@link ExceptionHandler} interface that should handle every Exception
+ * which could be occurred on the server and add some addition information depends of the cause
+ * before it will be passed to the client
+ *
+ * @author Alex Aksionchik 1/7/2018
+ * @version 1.0
  */
-public class ExceptionHandlerImpl implements ExceptionHandler {
+public class GlobalExceptionHandler implements ExceptionHandler {
 
     private static final Integer SC_UNPROCESSABLE_ENTITY = 422;
 

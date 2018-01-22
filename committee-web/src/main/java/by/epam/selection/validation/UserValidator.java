@@ -6,7 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by lex on 12/21/2017.
+ * Implementation of {@link Validator} interface for validating {@link User} entity
+ *
+ * @author Alex Aksionchik 12/21/2017
+ * @version 1.0
  */
 public class UserValidator implements Validator<User> {
 

@@ -11,7 +11,5 @@ import javax.servlet.http.HttpServletResponse;
  * @version 0.1
  */
 public interface Command {
-    String REDIRECT = "redirect:";
-
     View execute(HttpServletRequest request, HttpServletResponse response) throws ServletException;
 }

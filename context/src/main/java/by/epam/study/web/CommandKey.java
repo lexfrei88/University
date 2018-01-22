@@ -3,7 +3,10 @@ package by.epam.study.web;
 import java.util.Objects;
 
 /**
- * Created by lex on 1/8/2018.
+ * Key for {@link Command} that contains in {@link WebContext}
+ *
+ * @author Alex Aksionchik 1/8/2018
+ * @version 1.0
  */
 public class CommandKey {
 

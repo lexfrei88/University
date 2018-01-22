@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Map a single row of the {@link ResultSet} to an entity
+ * Transform a single row of the {@link ResultSet} to an entity
  *
  * @author Alex Aksionchik 12/13/2017
  * @version 1.0

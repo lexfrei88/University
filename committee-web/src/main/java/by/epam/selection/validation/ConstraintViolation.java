@@ -1,7 +1,12 @@
 package by.epam.selection.validation;
 
 /**
- * Created by lex on 12/21/2017.
+ * Object that contain data about violations in entity during validating it with {@link Validator}
+ *
+ * {@see Validator}
+ *
+ * @author Alex Aksionchik 12/21/2017
+ * @version 1.0
  */
 public class ConstraintViolation {
 
