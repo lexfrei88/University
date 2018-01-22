@@ -36,7 +36,7 @@ function ajaxPost() {
     var subjectIdValue = form.elements['subjectId'].value;
     var scoreValue = form.elements['score'].value;
 
-    if (certificateIdValue <= 0 || subjectIdValue <= 0 || scoreValue < 0 || scoreValue > 10) {
+    if (certificateIdValue < 0 || subjectIdValue <= 0 || scoreValue < 0 || scoreValue > 10) {
         return false;
     }
 
