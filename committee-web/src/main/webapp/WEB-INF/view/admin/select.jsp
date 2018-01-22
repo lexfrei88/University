@@ -41,5 +41,11 @@
         </tbody>
     </table>
 </section>
+<script>
+    var size = document.getElementById("selection").options.length;
+    if (size <= 1) {
+        document.getElementById("facultyForm").style.display = "none";
+    }
+</script>
 </body>
 </html>
