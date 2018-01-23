@@ -67,7 +67,6 @@ public class ContextBuilder {
             Class<?> clazz = Class.forName(beanData.getClassName());
             Method initMethod = clazz.getMethod(beanData.getInitMethod());
             bean = initMethod.invoke(null);
-//            contextMap.put(key, obj);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
@@ -87,7 +86,6 @@ public class ContextBuilder {
             List<String> methodParamsList = beanData.getMethodParams();
             Object[] args = methodParamsList.toArray(new String[methodParamsList.size()]);
             bean = initMethod.invoke(null, args);
-//            contextMap.put(key, obj);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
@@ -99,7 +97,6 @@ public class ContextBuilder {
         try {
             Class<?> clazz = Class.forName(beanData.getClassName());
             bean = clazz.newInstance();
-//            contextMap.put(key, obj);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
@@ -116,16 +113,12 @@ public class ContextBuilder {
                 String argRef = constructorArgs.get(i);
                 while (!contextMap.containsKey(argRef)) {
                     BeanData emptyBeanData = beanDataMap.get(argRef);
-//                    putBeanInContext(contextMap, emptyBeanData, beanDataMap);
                     putBeanInContext(beanDataMap, contextMap, argRef, emptyBeanData);
                 }
-//                if (contextMap.containsKey(argRef)) {
                 Object bean = contextMap.get(argRef);
                 parameters[i] = bean;
                 Class<?> clazz = Class.forName(beanData.getClassName());
                 newBean = ConstructorUtils.invokeConstructor(clazz, parameters);
-//                    contextMap.put(key, newBean);
-//                }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new ApplicationContextException(e.getMessage(), e);
