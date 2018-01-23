@@ -9,11 +9,11 @@ import by.epam.selection.service.exception.ServiceException;
 import by.epam.selection.util.WebUtils;
 import by.epam.selection.validation.CertificateValidator;
 import by.epam.selection.validation.ConstraintViolation;
+import by.epam.study.annotation.SimpleAutowire;
+import by.epam.study.web.Command;
 import by.epam.study.web.view.ActionName;
 import by.epam.study.web.view.PathConstant;
 import by.epam.study.web.view.View;
-import by.epam.study.annotation.SimpleAutowire;
-import by.epam.study.web.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,6 +52,7 @@ public class CertificatePostAjaxCommand implements Command {
         try {
             String certificateIdParameter = WebUtils.requiredNumberParameter(request.getParameter(CERTIFICATE_ID), CERTIFICATE_ID);
             Long certificateId = Long.parseLong(certificateIdParameter);
+            certificateId = certificateId == 0 ? null : certificateId;
 
             String subjectIdParameter = WebUtils.requiredNumberParameter(request.getParameter(SUBJECT_ID_PARAMETER), SUBJECT_ID_PARAMETER);
             long subjectId = Long.parseLong(subjectIdParameter);

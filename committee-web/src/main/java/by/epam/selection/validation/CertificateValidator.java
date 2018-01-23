@@ -21,7 +21,7 @@ public class CertificateValidator implements Validator<Certificate> {
     public Set<ConstraintViolation> validate(Certificate certificate) {
         Set<ConstraintViolation> violations = new HashSet<>();
 
-        if (certificate.getId() <= 0) {
+        if (certificate.getId() != null && certificate.getId() < 0) {
             violations.add(new ConstraintViolation("certificateIdError", ID_ERROR_MSG));
         }
 

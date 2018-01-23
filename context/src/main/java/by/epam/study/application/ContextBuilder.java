@@ -1,8 +1,8 @@
 package by.epam.study.application;
 
-import by.epam.study.exception.ApplicationContextException;
 import by.epam.study.application.helper.BeanData;
 import by.epam.study.application.helper.BeanDataHolder;
+import by.epam.study.exception.ApplicationContextException;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -28,41 +28,54 @@ public class ContextBuilder {
 
     public Map<String, Object> build(BeanDataHolder beanDataHolder) {
         Map<String, Object> contextMap = new HashMap<>();
-        for (Map.Entry<String, BeanData> entry : beanDataHolder.getBeanDataMap().entrySet()) {
+        Map<String, BeanData> beanDataMap = beanDataHolder.getBeanDataMap();
+        for (Map.Entry<String, BeanData> entry : beanDataMap.entrySet()) {
             if (contextMap.containsKey(entry.getKey())) {
                 continue;
             }
-            recursiveCreation(contextMap, entry.getKey(), entry.getValue(), beanDataHolder.getBeanDataMap());
+            String key = entry.getKey();
+            BeanData value = entry.getValue();
+            putBeanInContext(beanDataMap, contextMap, key, value);
         }
         return contextMap;
     }
 
-    private void recursiveCreation(Map<String, Object> contextMap, String key, BeanData beanData, Map<String, BeanData> beanDataMap){
-        if (beanData.getInitMethod() != null) {
-            if (beanData.getMethodParams() == null || beanData.getMethodParams().isEmpty()) {
-                instantiateByMethodWithoutParams(contextMap, key, beanData);
-            } else {
-                instantiateByMethodWithParams(contextMap, key, beanData);
-            }
-        } else if (beanData.getConstructorArgs() != null) {
-            instantiateByConstructorWithParams(contextMap, key, beanData, beanDataMap);
-        } else {
-            instantiateByDefaultConstructor(contextMap, key, beanData);
-        }
+    private void putBeanInContext(Map<String, BeanData> beanDataMap, Map<String, Object> contextMap, String key, BeanData value) {
+        Object bean = beanInstantiation(contextMap, value, beanDataMap);
+        contextMap.put(key, bean);
     }
 
-    private void instantiateByMethodWithoutParams(Map<String, Object> contextMap, String key, BeanData beanData) {
+    private Object beanInstantiation(Map<String, Object> contextMap, BeanData beanData, Map<String, BeanData> beanDataMap){
+        Object bean;
+        if (beanData.getInitMethod() != null) {
+            if (beanData.getMethodParams() == null || beanData.getMethodParams().isEmpty()) {
+                bean = instantiateByMethodWithoutParams(beanData);
+            } else {
+                bean = instantiateByMethodWithParams(beanData);
+            }
+        } else if (beanData.getConstructorArgs() != null) {
+            bean = instantiateByConstructorWithParams(contextMap, beanData, beanDataMap);
+        } else {
+            bean = instantiateByDefaultConstructor(beanData);
+        }
+        return bean;
+    }
+
+    private Object instantiateByMethodWithoutParams(BeanData beanData) {
+        Object bean;
         try {
             Class<?> clazz = Class.forName(beanData.getClassName());
             Method initMethod = clazz.getMethod(beanData.getInitMethod());
-            Object obj = initMethod.invoke(null);
-            contextMap.put(key, obj);
+            bean = initMethod.invoke(null);
+//            contextMap.put(key, obj);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
+        return bean;
     }
 
-    private void instantiateByMethodWithParams(Map<String, Object> contextMap, String key, BeanData beanData) {
+    private Object instantiateByMethodWithParams(BeanData beanData) {
+        Object bean;
         try {
             Class<?> clazz = Class.forName(beanData.getClassName());
             List<Class<String>> paramsTypesList = new ArrayList<>();
@@ -73,24 +86,28 @@ public class ContextBuilder {
             Method initMethod = clazz.getMethod(beanData.getInitMethod(), paramsTypesArray);
             List<String> methodParamsList = beanData.getMethodParams();
             Object[] args = methodParamsList.toArray(new String[methodParamsList.size()]);
-            Object obj = initMethod.invoke(null, args);
-            contextMap.put(key, obj);
+            bean = initMethod.invoke(null, args);
+//            contextMap.put(key, obj);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
+        return bean;
     }
 
-    private void instantiateByDefaultConstructor(Map<String, Object> contextMap, String key, BeanData beanData) {
+    private Object instantiateByDefaultConstructor(BeanData beanData) {
+        Object bean;
         try {
             Class<?> clazz = Class.forName(beanData.getClassName());
-            Object obj = clazz.newInstance();
-            contextMap.put(key, obj);
+            bean = clazz.newInstance();
+//            contextMap.put(key, obj);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
+        return bean;
     }
 
-    private void instantiateByConstructorWithParams(Map<String, Object> contextMap, String key, BeanData beanData, Map<String, BeanData> beanDataMap) {
+    private Object instantiateByConstructorWithParams(Map<String, Object> contextMap, BeanData beanData, Map<String, BeanData> beanDataMap) {
+        Object newBean = null;
         List<String> constructorArgs = beanData.getConstructorArgs();
         try {
             int size = constructorArgs.size();
@@ -99,19 +116,21 @@ public class ContextBuilder {
                 String argRef = constructorArgs.get(i);
                 while (!contextMap.containsKey(argRef)) {
                     BeanData emptyBeanData = beanDataMap.get(argRef);
-                    recursiveCreation(contextMap, argRef, emptyBeanData, beanDataMap);
+//                    putBeanInContext(contextMap, emptyBeanData, beanDataMap);
+                    putBeanInContext(beanDataMap, contextMap, argRef, emptyBeanData);
                 }
-                if (contextMap.containsKey(argRef)) {
-                    Object bean = contextMap.get(argRef);
-                    parameters[i] = bean;
-                    Class<?> clazz = Class.forName(beanData.getClassName());
-                    Object newBean = ConstructorUtils.invokeConstructor(clazz, parameters);
-                    contextMap.put(key, newBean);
-                }
+//                if (contextMap.containsKey(argRef)) {
+                Object bean = contextMap.get(argRef);
+                parameters[i] = bean;
+                Class<?> clazz = Class.forName(beanData.getClassName());
+                newBean = ConstructorUtils.invokeConstructor(clazz, parameters);
+//                    contextMap.put(key, newBean);
+//                }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new ApplicationContextException(e.getMessage(), e);
         }
+        return newBean;
     }
 
 }
