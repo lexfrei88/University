@@ -6,7 +6,7 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" charset="UTF-8" />
         </Console>
 
-        <File name="File" fileName="C:/by/epam/selection-committee/log/selection-committee.log">
+        <File name="File" fileName="${env:CATALINA_HOME}/logs/selection-committee.log">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" charset="UTF-8" />
         </File>
     </Appenders>
