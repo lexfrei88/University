@@ -27,16 +27,18 @@
         <form name="login" action="${pageContext.request.contextPath}/login" method="post">
             <label>
                 <fmt:message bundle="${i18n}" key="label.login"/>
-                <input type="email" name="email" placeholder="E-mail" pattern=".*[@].*[.].*"/>
+                <input id="email" type="email" name="email" placeholder="E-mail" pattern=".*[@].*[.].*"/>
             </label>
             <label>
                 <fmt:message bundle="${i18n}" key="label.password"/>
-                <input type="password" name="password" placeholder="Password"/>
+                <input id="password" type="password" name="password" placeholder="Password"/>
             </label>
             <p data-error-msg="${mistake}" class="error-msg">
                 <fmt:message bundle="${i18n}" key="wrong.authentication.data"/>
             </p>
             <input type="submit" value="Login">
+            <input id="admin-credential" type="button" value="Admin Credential"/>
+            <input id="user-credential" type="button" value="User Credential"/>
         </form>
     </div>
 </section>

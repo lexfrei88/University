@@ -1,5 +1,9 @@
 # University Selection Committee
 
+### Heroku:
+
+ * Current application is deployed on Heroku and available by link [University-epam](https://university-epam.herokuapp.com)
+
 ### How to use:
 
 1. Download source code : `https://github.com/lexfrei88/University.git`
