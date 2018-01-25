@@ -5,9 +5,9 @@
             <method-param name="driverName" value="com.mysql.cj.jdbc.Driver"/>
             <method-param name="maxTotal" value="1"/>
             <method-param name="maxWaitMillis" value="5000"/>
-            <method-param name="url" value="jdbc:mysql://localhost:3306/selection_committee?useSSL=false"/>
-            <method-param name="userName" value="root"/>
-            <method-param name="password" value="root"/>
+            <method-param name="url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_70ffa77ebf1d126?reconnect=true"/>
+            <method-param name="userName" value="b243bb423d107e"/>
+            <method-param name="password" value="7229eb6a"/>
         </bean>
 
         <bean id="connectionHolder" class="by.epam.selection.dao.connection.ConnectionHolderImpl">
