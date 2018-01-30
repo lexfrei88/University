@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 public class AuthenticationFilterTest {
 
     private static final Object DUMMY_OBJECT = new Object();
+    private static final String UNAUTHORIZED_ACCESS_ATTEMPT_MESSAGE = "Unauthorized access attempt";
 
     @Mock
     private HttpServletResponse response;
@@ -40,7 +41,7 @@ public class AuthenticationFilterTest {
         when(request.getSession(false)).thenReturn(null);
 
         authenticationFilter.doFilter(request, response, chain);
-        verify(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        verify(response).sendError(HttpServletResponse.SC_UNAUTHORIZED, UNAUTHORIZED_ACCESS_ATTEMPT_MESSAGE);
     }
 
     @Test

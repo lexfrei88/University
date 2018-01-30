@@ -2,6 +2,7 @@ package by.epam.selection.web.command;
 
 import by.epam.selection.entity.User;
 import by.epam.selection.service.UserService;
+import by.epam.selection.util.WebUtils;
 import by.epam.selection.validation.UserValidator;
 import by.epam.study.web.view.ActionName;
 import by.epam.study.web.view.PathConstant;
@@ -12,11 +13,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -27,11 +33,15 @@ import static org.mockito.Mockito.when;
 /**
  * Created by lex on 1/6/2018.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(WebUtils.class)
+@PowerMockIgnore("javax.management.*")
 public class RegisterPostCommandTest {
 
     private static final View REDIRECT_TO_LOGIN_COMMAND = new View(ActionName.REDIRECT, PathConstant.COMMAND_LOGIN);
     private static final View FORWARD_TO_REGISTER_PAGE = new View(ActionName.FORWARD, PathConstant.PAGE_REGISTER);
+
+    private static final Locale LOCALE = new Locale("en");
 
     @Mock private HttpServletRequest request;
     @Mock private HttpServletResponse response;
@@ -45,6 +55,11 @@ public class RegisterPostCommandTest {
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
+        PowerMockito.mockStatic(WebUtils.class);
+        when(WebUtils.getLocale(request)).thenReturn(LOCALE);
+
         when(request.getParameter(anyString()))
                 .thenReturn("first_name")
                 .thenReturn("last_name")
@@ -55,6 +70,7 @@ public class RegisterPostCommandTest {
 
     @Test
     public void shouldRedirectLoginCommandWhenExecute() throws Exception {
+        when(violations.isEmpty()).thenReturn(true);
         View actual = command.execute(request, response);
 
         verify(service).save(any(User.class));

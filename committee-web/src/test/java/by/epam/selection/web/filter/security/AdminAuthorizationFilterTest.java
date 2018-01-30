@@ -36,6 +36,7 @@ public class AdminAuthorizationFilterTest {
     private static final String ROLE_ADMIN_PARAMETER_NAME = "admin";
     private static final String ROLE_ADMIN_PARAMETER_VALUE = "ROLE_ADMIN";
     private static final String ROLE_ADMIN_INVALID_PARAM_VALUE = "invalid_value";
+    private static final String FORBIDDEN_MESSAGE = "Forbidden. Insufficient access rights";
 
     @Mock
     private FilterConfig filterConfig;
@@ -106,7 +107,7 @@ public class AdminAuthorizationFilterTest {
         when(authenticatedUser.isUserInRole(rolesSpy)).thenReturn(false);
 
         filter.doFilter(request, response, chain);
-        verify(response).sendError(HttpServletResponse.SC_FORBIDDEN);
+        verify(response).sendError(HttpServletResponse.SC_FORBIDDEN, FORBIDDEN_MESSAGE);
     }
 
 }
