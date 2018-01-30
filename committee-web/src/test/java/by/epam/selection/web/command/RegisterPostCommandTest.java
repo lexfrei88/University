@@ -2,7 +2,6 @@ package by.epam.selection.web.command;
 
 import by.epam.selection.entity.User;
 import by.epam.selection.service.UserService;
-import by.epam.selection.validation.ConstraintViolation;
 import by.epam.selection.validation.UserValidator;
 import by.epam.study.web.view.ActionName;
 import by.epam.study.web.view.PathConstant;
@@ -13,14 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyString;
@@ -41,7 +38,7 @@ public class RegisterPostCommandTest {
     @Mock private HttpSession session;
     @Mock private UserService service;
     @Mock private UserValidator validator;
-    @Spy private Set<ConstraintViolation> violations = new HashSet<>();
+    @Mock private Map<String, String> violations;
 
     @InjectMocks
     private RegisterPostCommand command = new RegisterPostCommand();
@@ -53,7 +50,7 @@ public class RegisterPostCommandTest {
                 .thenReturn("last_name")
                 .thenReturn("email")
                 .thenReturn("password");
-        when(validator.validate(any(User.class))).thenReturn(violations);
+        when(validator.validate(any(), any(User.class))).thenReturn(violations);
     }
 
     @Test

@@ -21,6 +21,8 @@ import java.io.IOException;
  */
 public class AuthenticationFilter implements Filter {
 
+    private static final String ERROR_MESSAGE = "Unauthorized access attempt";
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -32,7 +34,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
         if (session == null || session.getAttribute(AuthenticatedUser.SESSION_ATTRIBUTE_NAME) == null) {
-            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, ERROR_MESSAGE);
         } else {
             chain.doFilter(request, response);
         }

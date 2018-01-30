@@ -1,4 +1,4 @@
-package by.epam.selection.dao.connection;
+package by.epam.selection.dao.connection.pool;
 
 import by.epam.selection.dao.exception.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;

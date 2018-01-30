@@ -1,5 +1,6 @@
 package by.epam.selection.dao.template.mapper;
 
+import by.epam.selection.dao.jdbc.template.mapper.CertificateRowMapper;
 import by.epam.selection.entity.Certificate;
 import by.epam.selection.entity.Subject;
 import org.junit.Assert;

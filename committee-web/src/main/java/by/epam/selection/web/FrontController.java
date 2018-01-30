@@ -84,7 +84,7 @@ public class FrontController extends HttpServlet {
      * @param request  servlet request
      * @param response servlet response
      */
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String servletPath = request.getServletPath();
             String method = request.getMethod();

@@ -18,23 +18,14 @@
             <label for="firstName">
                 <fmt:message bundle="${i18n}" key="label.first.name"/>
                 <input type="text" placeholder="First Name" pattern="[A-Z].*" name="firstName" id="firstName" required/>
-                <span data-error="${not empty firstNameError}" class="error-msg">
-                    <fmt:message bundle="${i18n}" key="error.first.name"/>
-                </span>
             </label>
             <label for="lastName">
                 <fmt:message bundle="${i18n}" key="label.last.name"/>
                 <input type="text" placeholder="Last Name" pattern="[A-Z].*" name="lastName" id="lastName" required/>
-                <span data-error="${not empty lastNameError}" class="error-msg">
-                    <fmt:message bundle="${i18n}" key="error.last.name"/>
-                </span>
             </label>
             <label for="email">
                 <fmt:message bundle="${i18n}" key="label.email"/>
                 <input type="email" placeholder="Email" pattern=".*[@].*[.].*" name="email" id="email" required/>
-                <span data-error="${not empty emailError}" class="error-msg">
-                    <fmt:message bundle="${i18n}" key="error.email"/>
-                </span>
                 <span data-error="${not empty duplicatedEmail}" class="error-msg">
                     ${duplicatedEmail}
                 </span>
@@ -42,13 +33,17 @@
             <label for="password">
                 <fmt:message bundle="${i18n}" key="label.password"/>
                 <input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password" id="password" required/>
-                <span data-error="${not empty passwordError}" class="error-msg">
-                    <fmt:message bundle="${i18n}" key="error.password"/>
-                </span>
             </label>
             <input type="submit" value="<fmt:message bundle="${i18n}" key="label.register"/>"/>
         </form>
     </div>
 </section>
+<div id="tooltip">
+    <p>${messages.firstName}</p>
+    <p>${messages.lastName}</p>
+    <p>${messages.email}</p>
+    <p>${messages.password}</p>
+    <p>${messages.duplicatedEmail}</p>
+</div>
 </body>
 </html>

@@ -1,14 +1,18 @@
-package by.epam.selection.service;
+package by.epam.selection.service.impl;
 
 import by.epam.selection.dao.CertificateDao;
 import by.epam.selection.dao.exception.DaoException;
 import by.epam.selection.entity.Certificate;
+import by.epam.selection.service.CertificateService;
 import by.epam.selection.service.exception.ServiceException;
 
 import java.util.List;
 
 /**
- * Created by lex on 12/17/2017.
+ * Implementation of {@link CertificateService} interface
+ *
+ * @author Alex Aksionchik 12/17/2017
+ * @version 1.0
  */
 public class CertificateServiceImpl implements CertificateService {
 

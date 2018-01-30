@@ -1,4 +1,4 @@
-package by.epam.selection.dao.connection;
+package by.epam.selection.dao.connection.holder;
 
 import java.sql.Connection;
 import java.sql.SQLException;

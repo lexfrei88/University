@@ -1,9 +1,10 @@
-package by.epam.selection.dao;
+package by.epam.selection.dao.jdbc;
 
+import by.epam.selection.dao.UserDao;
 import by.epam.selection.dao.exception.DaoException;
-import by.epam.selection.dao.template.JdbcTemplate;
-import by.epam.selection.dao.template.extractor.CredentialExtractor;
-import by.epam.selection.dao.template.mapper.UserRowMapper;
+import by.epam.selection.dao.jdbc.template.JdbcTemplate;
+import by.epam.selection.dao.jdbc.template.extractor.CredentialExtractor;
+import by.epam.selection.dao.jdbc.template.mapper.UserRowMapper;
 import by.epam.selection.entity.Role;
 import by.epam.selection.entity.User;
 import org.apache.logging.log4j.LogManager;

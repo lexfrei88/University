@@ -1,15 +1,19 @@
-package by.epam.selection.service;
+package by.epam.selection.service.impl;
 
 import by.epam.selection.dao.FacultyDao;
 import by.epam.selection.dao.exception.DaoException;
 import by.epam.selection.entity.Faculty;
+import by.epam.selection.service.FacultyService;
 import by.epam.selection.service.exception.NotFoundException;
 import by.epam.selection.service.exception.ServiceException;
 
 import java.util.List;
 
 /**
- * Created by lex on 12/17/2017.
+ * Implementation of {@link FacultyService} interface
+ *
+ * @author Alex Aksionchik 12/17/2017
+ * @version 1.0
  */
 public class FacultyServiceImpl implements FacultyService {
 

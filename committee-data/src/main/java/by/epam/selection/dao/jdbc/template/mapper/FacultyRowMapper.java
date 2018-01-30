@@ -1,4 +1,4 @@
-package by.epam.selection.dao.template.mapper;
+package by.epam.selection.dao.jdbc.template.mapper;
 
 import by.epam.selection.entity.Faculty;
 

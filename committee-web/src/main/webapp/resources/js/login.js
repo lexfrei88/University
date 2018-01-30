@@ -1,8 +1,9 @@
 function getErrorMsg() {
-    var errorMsgElement = document.getElementsByClassName("error-msg")[0];
-    var error = errorMsgElement.getAttribute("data-error-msg");
-    if (error > 0) {
-        errorMsgElement.style.display = "block"
+    var errorMsg = document.getElementById("tooltip");
+    var text = errorMsg.innerText;
+    if (!text || /^\s*$/.test(text)) {
+    } else {
+        errorMsg.style.display = "block";
     }
 }
 

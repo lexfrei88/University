@@ -1,21 +1,22 @@
-package by.epam.selection.dao.connection;
+package by.epam.selection.dao.connection.holder;
 
 import by.epam.selection.dao.exception.DaoException;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
  * Serve the Transaction support.
+ *
+ * @author Alex Aksionchik 12/3/2017
+ * @version 1.0
  */
 public interface Transactional {
 
     /**
      * Receive Connection with auto commit properties set to false.
-     * @return a Connection to the database
      * @throws DaoException in case of any SQL exception while getting connection
      */
-    Connection getTxConnection() throws DaoException;
+    void getTxConnection() throws DaoException;
 
     /**
      * Makes all changes made since the previous commit/rollback permanent.

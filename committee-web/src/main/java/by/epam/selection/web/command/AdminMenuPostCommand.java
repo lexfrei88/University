@@ -1,13 +1,11 @@
 package by.epam.selection.web.command;
 
-import by.epam.selection.exception.WrongParameterException;
 import by.epam.selection.service.UserService;
 import by.epam.selection.service.exception.ServiceException;
-import by.epam.selection.util.WebUtils;
-import by.epam.study.web.view.PathConstant;
 import by.epam.study.annotation.SimpleAutowire;
 import by.epam.study.web.Command;
 import by.epam.study.web.view.ActionName;
+import by.epam.study.web.view.PathConstant;
 import by.epam.study.web.view.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,14 +34,13 @@ public class AdminMenuPostCommand implements Command {
         logger.info("[POST] Update users approve status by admin.");
 
         try {
-            String[] parameterValues = request.getParameterValues(APPROVE_PARAMETERS);
-            String[] userIdStringArray = WebUtils.requiredNumberParameter(parameterValues, APPROVE_PARAMETERS);
+            String[] userIdStringArray = request.getParameterValues(APPROVE_PARAMETERS);
             long[] userIdArray = Arrays.stream(userIdStringArray)
                     .mapToLong(Long::parseLong)
                     .toArray();
             userService.updateApproveStatus(userIdArray);
             return REDIRECT_TO_ADMIN_APPROVE_STATUS_COMMAND;
-        } catch (ServiceException | WrongParameterException e) {
+        } catch (ServiceException e) {
             throw new ServletException(e.getMessage(), e);
         }
     }

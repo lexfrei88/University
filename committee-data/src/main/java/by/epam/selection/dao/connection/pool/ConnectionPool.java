@@ -1,4 +1,4 @@
-package by.epam.selection.dao.connection;
+package by.epam.selection.dao.connection.pool;
 
 import java.sql.Connection;
 

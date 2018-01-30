@@ -1,5 +1,6 @@
 package by.epam.selection.dao.template.mapper;
 
+import by.epam.selection.dao.jdbc.template.mapper.FacultyRowMapper;
 import by.epam.selection.entity.Faculty;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,6 +1,6 @@
 package by.epam.selection.dao.tx;
 
-import by.epam.selection.dao.connection.Transactional;
+import by.epam.selection.dao.connection.holder.Transactional;
 import by.epam.selection.dao.exception.DaoException;
 import by.epam.selection.service.exception.ServiceException;
 import by.epam.study.application.ApplicationContext;

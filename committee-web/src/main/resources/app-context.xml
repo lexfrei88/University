@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <context>
     <beans>
-        <bean id="connectionPool" class="by.epam.selection.dao.connection.ConnectionPoolImpl" init-method="create">
+        <bean id="connectionPool" class="by.epam.selection.dao.connection.pool.ConnectionPoolImpl" init-method="create">
             <method-param name="driverName" value="com.mysql.cj.jdbc.Driver"/>
             <method-param name="maxTotal" value="1"/>
             <method-param name="maxWaitMillis" value="5000"/>
@@ -10,39 +10,39 @@
             <method-param name="password" value="7229eb6a"/>
         </bean>
 
-        <bean id="connectionHolder" class="by.epam.selection.dao.connection.ConnectionHolderImpl">
+        <bean id="connectionHolder" class="by.epam.selection.dao.connection.holder.ConnectionHolderImpl">
             <constructor-arg ref="connectionPool"/>
         </bean>
 
-        <bean id="jdbcTemplate" class="by.epam.selection.dao.template.JdbcTemplate">
+        <bean id="jdbcTemplate" class="by.epam.selection.dao.jdbc.template.JdbcTemplate">
             <constructor-arg ref="connectionHolder"/>
         </bean>
 
-        <bean id="certificateDao" class="by.epam.selection.dao.CertificateDaoImpl">
+        <bean id="certificateDao" class="by.epam.selection.dao.jdbc.CertificateDaoImpl">
             <constructor-arg ref="jdbcTemplate"/>
         </bean>
 
-        <bean id="facultyDao" class="by.epam.selection.dao.FacultyDaoImpl">
+        <bean id="facultyDao" class="by.epam.selection.dao.jdbc.FacultyDaoImpl">
             <constructor-arg ref="jdbcTemplate"/>
         </bean>
 
-        <bean id="userDao" class="by.epam.selection.dao.UserDaoImpl">
+        <bean id="userDao" class="by.epam.selection.dao.jdbc.UserDaoImpl">
             <constructor-arg ref="jdbcTemplate"/>
         </bean>
 
         <bean id="userValid" class="by.epam.selection.validation.UserValidator"/>
 
-        <bean id="userService" class="by.epam.selection.service.UserServiceImpl">
+        <bean id="userService" class="by.epam.selection.service.impl.UserServiceImpl">
             <constructor-arg ref="userDao"/>
         </bean>
 
         <bean id="certificateValidator" class="by.epam.selection.validation.CertificateValidator"/>
 
-        <bean id="certificateService" class="by.epam.selection.service.CertificateServiceImpl">
+        <bean id="certificateService" class="by.epam.selection.service.impl.CertificateServiceImpl">
             <constructor-arg ref="certificateDao"/>
         </bean>
 
-        <bean id="facultyService" class="by.epam.selection.service.FacultyServiceImpl">
+        <bean id="facultyService" class="by.epam.selection.service.impl.FacultyServiceImpl">
             <constructor-arg ref="facultyDao"/>
         </bean>
     </beans>

@@ -1,5 +1,6 @@
-package by.epam.selection.dao.connection;
+package by.epam.selection.dao.connection.holder;
 
+import by.epam.selection.dao.connection.pool.ConnectionPool;
 import by.epam.selection.dao.exception.DaoException;
 
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class ConnectionHolderImpl implements ConnectionHolder, Transactional {
     }
 
     @Override
-    public Connection getTxConnection() throws DaoException {
+    public void getTxConnection() throws DaoException {
         Connection conn;
         try {
             conn = connection.get();
@@ -50,7 +51,6 @@ public class ConnectionHolderImpl implements ConnectionHolder, Transactional {
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
-        return conn;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ConnectionHolderImpl implements ConnectionHolder, Transactional {
             Connection conn = connection.get();
             conn.commit();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 
@@ -69,7 +69,7 @@ public class ConnectionHolderImpl implements ConnectionHolder, Transactional {
             Connection conn = connection.get();
             conn.rollback();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            throw new DaoException(e.getMessage(), e);
         }
     }
 

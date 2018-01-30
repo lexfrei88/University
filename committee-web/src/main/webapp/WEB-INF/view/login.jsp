@@ -33,15 +33,18 @@
                 <fmt:message bundle="${i18n}" key="label.password"/>
                 <input id="password" type="password" name="password" placeholder="Password"/>
             </label>
-            <p data-error-msg="${mistake}" class="error-msg">
-                <fmt:message bundle="${i18n}" key="wrong.authentication.data"/>
-            </p>
             <input type="submit" value="Login">
             <input id="admin-credential" type="button" value="Admin Credential"/>
             <input id="user-credential" type="button" value="User Credential"/>
         </form>
     </div>
 </section>
+<div id="tooltip">
+    <p>${messages.email}</p>
+    <p>${messages.password}</p>
+    <p>${messages.wrongPassword}</p>
+    <p>${messages.wrongEmail}</p>
+</div>
 </body>
 
 </html>

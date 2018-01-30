@@ -2,11 +2,12 @@ package by.epam.selection.validation;
 
 import by.epam.selection.entity.Identifiable;
 
-import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Interface for validating Entity
- *
+ * <p>
  * {@see ConstraintViolation}
  *
  * @author Alex Aksionchik 12/21/2017
@@ -17,9 +18,9 @@ public interface Validator<T extends Identifiable> {
     /**
      * Validate either specified entity has valid data or not
      *
-     * @param obj - entity should be validated
-     * @return Set of {@link ConstraintViolation} object each of that contains data about invalid data in entity
-     * or empty Set if entity is valid
+     * @param locale - current request locale
+     * @param obj    - entity should be validated
+     * @return Map that contains error message for each violation
      */
-    Set<ConstraintViolation> validate(T obj);
+    Map<String, String> validate(Locale locale, T obj);
 }

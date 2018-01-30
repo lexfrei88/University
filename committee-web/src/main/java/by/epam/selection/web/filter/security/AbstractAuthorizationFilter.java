@@ -33,6 +33,8 @@ import java.util.Set;
  */
 public abstract class AbstractAuthorizationFilter implements Filter {
 
+    private static final String ERROR_MESSAGE = "Forbidden. Insufficient access rights";
+
     private Logger logger = LogManager.getLogger(this.getClass());
 
     private Set<Role> roles = new HashSet<>();
@@ -62,7 +64,7 @@ public abstract class AbstractAuthorizationFilter implements Filter {
         if (authenticatedUser.isUserInRole(roles)) {
             chain.doFilter(request, response);
         } else {
-            httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+            httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, ERROR_MESSAGE);
         }
     }
 

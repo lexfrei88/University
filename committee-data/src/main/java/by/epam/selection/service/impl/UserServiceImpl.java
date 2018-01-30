@@ -1,14 +1,15 @@
-package by.epam.selection.service;
+package by.epam.selection.service.impl;
 
+import by.epam.selection.AuthenticatedUser;
 import by.epam.selection.dao.UserDao;
 import by.epam.selection.dao.exception.DaoException;
 import by.epam.selection.dao.tx.Transaction;
 import by.epam.selection.entity.Faculty;
 import by.epam.selection.entity.Role;
 import by.epam.selection.entity.User;
+import by.epam.selection.service.UserService;
 import by.epam.selection.service.exception.NotFoundException;
 import by.epam.selection.service.exception.ServiceException;
-import by.epam.selection.AuthenticatedUser;
 import by.epam.selection.service.util.SecurityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by lex on 12/13/2017.
+ * Implementation of {@link UserService} interface
+ *
+ * @author Alex Aksionchik 12/13/2017
+ * @version 1.0
  */
 public class UserServiceImpl implements UserService {
 
@@ -105,8 +109,11 @@ public class UserServiceImpl implements UserService {
         AuthenticatedUser authenticatedUser;
         try {
             User user = userDao.getByEmail(email);
+            if (user == null) {
+                throw new NotFoundException("User not found with email: " + email);
+            }
             authenticatedUser = login(user, password);
-        } catch (DaoException e) {
+        } catch (DaoException | NotFoundException e) {
             throw new ServiceException(e.getMessage(), e);
         }
         return authenticatedUser;

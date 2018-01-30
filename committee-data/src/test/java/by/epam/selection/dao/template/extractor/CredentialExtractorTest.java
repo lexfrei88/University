@@ -1,5 +1,6 @@
 package by.epam.selection.dao.template.extractor;
 
+import by.epam.selection.dao.jdbc.template.extractor.CredentialExtractor;
 import by.epam.selection.entity.Role;
 import by.epam.selection.entity.User;
 import org.junit.Assert;

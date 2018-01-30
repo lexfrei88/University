@@ -1,5 +1,7 @@
 package by.epam.selection.dao.connection;
 
+import by.epam.selection.dao.connection.holder.ConnectionHolderImpl;
+import by.epam.selection.dao.connection.pool.ConnectionPool;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

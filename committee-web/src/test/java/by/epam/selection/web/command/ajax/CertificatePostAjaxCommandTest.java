@@ -4,7 +4,6 @@ import by.epam.selection.AuthenticatedUser;
 import by.epam.selection.entity.Certificate;
 import by.epam.selection.service.CertificateService;
 import by.epam.selection.validation.CertificateValidator;
-import by.epam.selection.validation.ConstraintViolation;
 import by.epam.study.web.view.ActionName;
 import by.epam.study.web.view.PathConstant;
 import by.epam.study.web.view.View;
@@ -14,14 +13,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -43,7 +40,7 @@ public class CertificatePostAjaxCommandTest {
     @Mock private AuthenticatedUser authenticatedUser;
     @Mock private CertificateService service;
     @Mock private CertificateValidator validator;
-    @Spy private Set<ConstraintViolation> violations = new HashSet<>();
+    @Mock private Map<String, String> violations;
 
     @InjectMocks
     private CertificatePostAjaxCommand command = new CertificatePostAjaxCommand();
@@ -53,7 +50,7 @@ public class CertificatePostAjaxCommandTest {
         when(request.getParameter(anyString()))
                 .thenReturn("2")
                 .thenReturn("7");
-        when(validator.validate(any(Certificate.class))).thenReturn(violations);
+        when(validator.validate(any(), any(Certificate.class))).thenReturn(violations);
     }
 
     @Test
@@ -74,7 +71,6 @@ public class CertificatePostAjaxCommandTest {
 
         View actual = command.execute(request, response);
 
-        verify(violations).iterator();
         Assert.assertEquals(FORWARD_TO_AJAX_CERTIFICATE_POST_RESPONSE_PAGE, actual);
     }
 

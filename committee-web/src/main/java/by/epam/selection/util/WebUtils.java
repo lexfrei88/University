@@ -1,9 +1,9 @@
 package by.epam.selection.util;
 
-import by.epam.selection.exception.WrongParameterException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Util class for Web Layer
@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
  */
 public final class WebUtils {
 
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+    private static final String LOCALE_ATTR = "lang";
+    private static final String DEFAULT_LOCALE = "en";
 
     private WebUtils() {
     }
@@ -23,51 +24,14 @@ public final class WebUtils {
      *
      * @param parameter     - parameter value should be checked
      * @param parameterName - parameter name
-     * @return parameter value itself if it's correct else throw exception
-     * @throws WrongParameterException if parameter is incorrect
+     * @param bundle        - bundle with internationalized messages
+     * @param errorMessage  - map that collects error messages
      */
-    public static String requiredNotEmptyParameter(String parameter, String parameterName) throws WrongParameterException {
-        if (parameter == null || parameter.isEmpty()) {
-            throw new WrongParameterException(parameterName + " cannot be null or empty.");
+    public static void notEmpty(String parameter, String parameterName, ResourceBundle bundle, Map<String, String> errorMessage) {
+        if (parameter == null || parameter.trim().isEmpty()) {
+            String message = bundle.getString(parameterName + ".error");
+            errorMessage.put(parameterName, message);
         }
-        return parameter;
-    }
-
-    /**
-     * Check either array of passed parameters is a number
-     *
-     * @param parameterValues - parameter values that should be checked
-     * @param parameterName   - parameter name
-     * @return parameter value itself if it's correct else throw exception
-     * @throws WrongParameterException if parameter is incorrect
-     */
-    public static String[] requiredNumberParameter(String[] parameterValues, String parameterName) throws WrongParameterException {
-        if (parameterValues == null) {
-            throw new WrongParameterException(parameterName + " cannot be null.");
-        }
-        for (int i = 0; i < parameterValues.length; i++) {
-            requiredNumberParameter(parameterValues[i], parameterName + " No." + i);
-        }
-        return parameterValues;
-    }
-
-    /**
-     * Check either passed parameter is a number
-     *
-     * @param parameter - parameter value that should be checked
-     * @param parameterName   - parameter name
-     * @return parameter value itself if it's correct else throw exception
-     * @throws WrongParameterException if parameter is incorrect
-     */
-    public static String requiredNumberParameter(String parameter, String parameterName) throws WrongParameterException {
-        if (parameter == null) {
-            throw new WrongParameterException(parameterName + " cannot be null.");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(parameter);
-        if (!matcher.matches()) {
-            throw new WrongParameterException(parameterName + " should be a number.");
-        }
-        return parameter;
     }
 
     /**
@@ -84,6 +48,15 @@ public final class WebUtils {
             result = cause;
         }
         return result;
+    }
+
+
+    public static Locale getLocale(HttpServletRequest request) {
+        String localeValue = (String) request.getSession().getAttribute(LOCALE_ATTR);
+        if (localeValue == null || localeValue.trim().isEmpty()) {
+            localeValue = DEFAULT_LOCALE;
+        }
+        return new Locale(localeValue);
     }
 
 }

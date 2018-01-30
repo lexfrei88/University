@@ -1,4 +1,4 @@
-package by.epam.selection.dao.template.mapper;
+package by.epam.selection.dao.jdbc.template.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

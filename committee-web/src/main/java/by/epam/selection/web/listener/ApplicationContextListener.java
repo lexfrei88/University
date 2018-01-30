@@ -1,6 +1,6 @@
 package by.epam.selection.web.listener;
 
-import by.epam.selection.dao.connection.ConnectionPool;
+import by.epam.selection.dao.connection.pool.ConnectionPool;
 import by.epam.study.application.ApplicationContext;
 import by.epam.study.application.SimpleClassPathXmlApplicationContext;
 

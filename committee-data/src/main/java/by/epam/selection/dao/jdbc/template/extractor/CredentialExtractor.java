@@ -1,4 +1,4 @@
-package by.epam.selection.dao.template.extractor;
+package by.epam.selection.dao.jdbc.template.extractor;
 
 import by.epam.selection.entity.Role;
 import by.epam.selection.entity.User;
@@ -36,7 +36,7 @@ public class CredentialExtractor implements ResultSetExtractor<User> {
             Role role = Role.valueOf(roleString.toUpperCase());
             roles.add(role);
         }
-        return new User(id, password, roles);
+        return id == null ? null : new User(id, password, roles);
     }
 
 }

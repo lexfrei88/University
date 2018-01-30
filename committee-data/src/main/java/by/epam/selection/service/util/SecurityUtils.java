@@ -14,12 +14,19 @@ public final class SecurityUtils {
 
     private static final String ALGORITHM = "MD5";
 
-    private SecurityUtils() {}
+    private SecurityUtils() {
+    }
 
+    /**
+     * Hash string with MD5 algorithm
+     *
+     * @param password - string that should be hashed
+     * @return string that represent hashed password
+     */
     public static String md5Hex(String password) {
         String hash;
         try {
-            MessageDigest md  = MessageDigest.getInstance(ALGORITHM);
+            MessageDigest md = MessageDigest.getInstance(ALGORITHM);
             md.update(password.getBytes());
             byte[] digest = md.digest();
             hash = DatatypeConverter.printHexBinary(digest).toUpperCase();

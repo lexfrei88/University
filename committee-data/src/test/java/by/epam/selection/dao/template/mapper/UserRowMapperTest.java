@@ -1,5 +1,6 @@
 package by.epam.selection.dao.template.mapper;
 
+import by.epam.selection.dao.jdbc.template.mapper.UserRowMapper;
 import by.epam.selection.entity.Faculty;
 import by.epam.selection.entity.User;
 import org.junit.Assert;

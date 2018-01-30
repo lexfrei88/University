@@ -1,4 +1,4 @@
-package by.epam.selection.dao.template.extractor;
+package by.epam.selection.dao.jdbc.template.extractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

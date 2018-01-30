@@ -4,7 +4,8 @@ import by.epam.selection.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by lex on 1/5/2018.
@@ -20,7 +21,7 @@ public class UserValidatorTest {
     public void shouldFourConstraintsWhenValidateUser() throws Exception {
         UserValidator userValidator = new UserValidator();
         User tested = new User(USER_ID, INVALID_NAME, INVALID_SURNAME, INVALID_MAIL, false, null);
-        Set<ConstraintViolation> violations = userValidator.validate(tested);
+        Map<String, String> violations = userValidator.validate(Locale.ENGLISH, tested);
         Assert.assertEquals(4, violations.size());
     }
 

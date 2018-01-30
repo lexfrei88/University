@@ -1,8 +1,9 @@
-package by.epam.selection.dao;
+package by.epam.selection.dao.jdbc;
 
+import by.epam.selection.dao.CertificateDao;
 import by.epam.selection.dao.exception.DaoException;
-import by.epam.selection.dao.template.JdbcTemplate;
-import by.epam.selection.dao.template.mapper.CertificateRowMapper;
+import by.epam.selection.dao.jdbc.template.JdbcTemplate;
+import by.epam.selection.dao.jdbc.template.mapper.CertificateRowMapper;
 import by.epam.selection.entity.Certificate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

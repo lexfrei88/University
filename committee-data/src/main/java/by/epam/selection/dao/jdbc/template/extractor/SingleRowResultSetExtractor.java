@@ -1,6 +1,6 @@
-package by.epam.selection.dao.template.extractor;
+package by.epam.selection.dao.jdbc.template.extractor;
 
-import by.epam.selection.dao.template.mapper.RowMapper;
+import by.epam.selection.dao.jdbc.template.mapper.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

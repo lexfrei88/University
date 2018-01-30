@@ -5,7 +5,8 @@ import by.epam.selection.entity.Subject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by lex on 1/5/2018.
@@ -22,8 +23,8 @@ public class CertificateValidatorTest {
         Subject subject = new Subject(INVALID_SUBJECT_ID, SUBJECT_NAME);
         Certificate certificate = new Certificate(subject, INVALID_SCORE);
         CertificateValidator validator = new CertificateValidator();
-        Set<ConstraintViolation> violationSet = validator.validate(certificate);
-        Assert.assertEquals(2, violationSet.size());
+        Map<String, String> violations = validator.validate(Locale.ENGLISH, certificate);
+        Assert.assertEquals(2, violations.size());
     }
 
     @Test
@@ -31,8 +32,8 @@ public class CertificateValidatorTest {
         Subject subject = new Subject(VALID_SUBJECT_ID, SUBJECT_NAME);
         Certificate certificate = new Certificate(subject, INVALID_SCORE);
         CertificateValidator validator = new CertificateValidator();
-        Set<ConstraintViolation> violationSet = validator.validate(certificate);
-        Assert.assertEquals(1, violationSet.size());
+        Map<String, String> violations = validator.validate(Locale.ENGLISH, certificate);
+        Assert.assertEquals(1, violations.size());
     }
 
 }

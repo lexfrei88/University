@@ -1,11 +1,9 @@
 package by.epam.selection.web.command;
 
 import by.epam.selection.entity.User;
-import by.epam.selection.exception.WrongParameterException;
 import by.epam.selection.service.UserService;
 import by.epam.selection.service.exception.ServiceException;
 import by.epam.selection.util.WebUtils;
-import by.epam.selection.validation.ConstraintViolation;
 import by.epam.selection.validation.UserValidator;
 import by.epam.study.annotation.SimpleAutowire;
 import by.epam.study.web.Command;
@@ -19,7 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * @author Alex Aksionchik 12/4/2017
@@ -29,9 +29,12 @@ public class RegisterPostCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(RegisterPostCommand.class);
 
+    private static final String MESSAGES_ERRORS_FILE_PATH = "messages/errors";
+    private static final String ERROR_MESSAGES_ATTR = "messages";
+
     private static final String EMAIL_UNIQUE_INDEX_NAME = "idx_unique_user_email";
-    private static final String DUPLICATED_EMAIL_MSG = "Email already exist.";
     private static final String DUPLICATED_EMAIL_ATTRIBUTE = "duplicatedEmail";
+    private static final String DUPLICATED_EMAIL_BUNDLE_KEY = "duplicated.email";
 
     private static final String FIRST_NAME_PARAMETER = "firstName";
     private static final String LAST_NAME_PARAMETER = "lastName";
@@ -51,28 +54,17 @@ public class RegisterPostCommand implements Command {
     public View execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         logger.info("[POST] Register new user.");
 
-        String firstName, lastName, email, password;
-        try {
-            String firstNameParameter = request.getParameter(FIRST_NAME_PARAMETER);
-            firstName = WebUtils.requiredNotEmptyParameter(firstNameParameter, FIRST_NAME_PARAMETER);
+        String firstName = request.getParameter(FIRST_NAME_PARAMETER);
+        String lastName = request.getParameter(LAST_NAME_PARAMETER);
+        String email = request.getParameter(EMAIL_PARAMETER);
+        String password = request.getParameter(PASSWORD_PARAMETER);
 
-            String lastNameParameter = request.getParameter(LAST_NAME_PARAMETER);
-            lastName = WebUtils.requiredNotEmptyParameter(lastNameParameter, LAST_NAME_PARAMETER);
-
-            String emailParameter = request.getParameter(EMAIL_PARAMETER);
-            email = WebUtils.requiredNotEmptyParameter(emailParameter, EMAIL_PARAMETER);
-
-            String passwordParameter = request.getParameter(PASSWORD_PARAMETER);
-            password = WebUtils.requiredNotEmptyParameter(passwordParameter, PASSWORD_PARAMETER);
-        } catch (WrongParameterException e) {
-            throw new ServletException(e.getMessage(), e);
-        }
-
+        Locale locale = WebUtils.getLocale(request);
         User user = new User(firstName, lastName, email, password);
-        Set<ConstraintViolation> violations = userValidator.validate(user);
+        Map<String, String> errorMessage = userValidator.validate(locale, user);
 
         View view;
-        if (violations.isEmpty()) {
+        if (errorMessage.isEmpty()) {
             try {
                 userService.save(user);
                 logger.debug("New user has been created.");
@@ -81,19 +73,18 @@ public class RegisterPostCommand implements Command {
                 Throwable root = WebUtils.getExceptionRootCause(e);
                 String msg = root.getMessage();
                 if (root instanceof SQLIntegrityConstraintViolationException && msg.contains(EMAIL_UNIQUE_INDEX_NAME)) {
-                    request.setAttribute(DUPLICATED_EMAIL_ATTRIBUTE, DUPLICATED_EMAIL_MSG);
+                    ResourceBundle bundle = ResourceBundle.getBundle(MESSAGES_ERRORS_FILE_PATH, locale);
+                    errorMessage.put(DUPLICATED_EMAIL_ATTRIBUTE, bundle.getString(DUPLICATED_EMAIL_BUNDLE_KEY));
                     view = FORWARD_TO_REGISTER_PAGE;
                 } else {
                     throw new ServletException(e.getMessage(), e);
                 }
             }
         } else {
-            for (ConstraintViolation violation : violations) {
-                request.setAttribute(violation.getKey(), violation.getMessage());
-            }
-            view = FORWARD_TO_REGISTER_PAGE;
             logger.debug("Wrong input data.");
+            view = FORWARD_TO_REGISTER_PAGE;
         }
+        request.setAttribute(ERROR_MESSAGES_ATTR, errorMessage);
         return view;
     }
 

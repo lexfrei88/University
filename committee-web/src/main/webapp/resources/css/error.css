@@ -3,3 +3,18 @@
     color: red;
     text-align: center;
 }
+
+#tooltip {
+    display: none;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 400px;
+    z-index: 1;
+}
