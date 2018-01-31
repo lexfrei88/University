@@ -23,12 +23,15 @@
     NOTE! This option is available only if you have necessary environment variables such as CATALINA_HOME, 
     and PATH variables for Maven, Tomcat, MySQL
  
-3. Create scheme in MySQL database with `sql/initDb.sql` script and then fill it with `sql/populateDb.sql`
+If script want work for any reason do the next steps:
+ 
+4. Create scheme in MySQL database with `sql/initDb.sql` script and then fill it with `sql/populateDb.sql`
 
-4. Build with maven command: `mvn package`
+5. Build with maven command: `mvn package`
 
-5. Now you can take `war` file from web module and deploy it to tomcat
+6. Now you can take `war` file from web module and deploy it to tomcat
 
+7. Open website. [Default localhost tomcat link](http://localhost:8080/sc/login)
 
 ### FAQ
 
