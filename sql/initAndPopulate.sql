@@ -184,7 +184,7 @@ VALUES
 INSERT INTO 
 	user (first_name, last_name, email, password, faculty_id, approved_status) 
 VALUES 
-	("Arya", "Stark", "nobody@braavos.com", MD5("thewinteriscomming2"), 1, b'1'), 					-- 1
+	("Arya", "Stark", "nobody@braavos.com", MD5("Thewinteriscomming2"), 1, b'1'), 					-- 1
 	("Jhon", "Snow", "jhon.s@nightwatch.com", MD5("kingOfNorth"), 2, b'1'),							-- 2
 	("Cersei", "Lannister", "queen@kingslanding.com", MD5("Youlldiesoon1"), 3, b'1'),				-- 3
 	("Hodor", "Hodor", "hodor@hodor.hodor", MD5("hodor"), 1, b'1'),									-- 4
