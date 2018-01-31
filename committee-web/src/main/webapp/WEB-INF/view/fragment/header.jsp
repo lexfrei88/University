@@ -1,6 +1,4 @@
 <%@ taglib prefix="security" uri="/WEB-INF/tld/security.tld" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/colapse.css">
 <header>
     <ul>
         <input type="checkbox" id="collapse"/>

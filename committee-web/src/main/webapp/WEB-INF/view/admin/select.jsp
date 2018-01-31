@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css">
+    <%@include file="../fragment/resources.jsp" %>
+    <%@ include file="../fragment/i18n.jsp" %>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/faculty.css">
-    <%@include file="../fragment/i18n.jsp" %>
-    <title>Select page</title>
+    <title><fmt:message bundle="${i18n}" key="page.select"/></title>
 </head>
 <body>
 <%@ include file="../fragment/header.jsp" %>

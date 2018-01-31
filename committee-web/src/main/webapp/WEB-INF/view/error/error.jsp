@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/faculty.css">
+    <%@include file="../fragment/resources.jsp" %>
     <%@ include file="../fragment/i18n.jsp" %>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/faculty.css">
     <title>Error page</title>
 </head>
 <body>

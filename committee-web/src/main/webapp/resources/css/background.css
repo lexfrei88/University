@@ -4,12 +4,10 @@ body {
   background-repeat: no-repeat;
   background-color: #999999;
   background-position: center 46px;
-  /*background-size: 980px, 561px;*/
 }
 
 @media (max-width: 980px) {
   body {
-    /*background-size: contain;*/
     background-size: initial;
   }
 }

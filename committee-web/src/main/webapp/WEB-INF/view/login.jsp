@@ -2,20 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <%@include file="fragment/resources.jsp" %>
+    <%@ include file="fragment/i18n.jsp" %>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/background.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/section.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/error.css">
     <script async src="${pageContext.request.contextPath}/resources/js/login.js"></script>
-    <%@ include file="fragment/i18n.jsp" %>
     <title><fmt:message bundle="${i18n}" key="page.login"/></title>
 </head>
 
 <body onload="getErrorMsg()">
 <%@ include file="fragment/header.jsp" %>
-
 <section>
     <div class="login-form">
         <h1>
@@ -27,11 +24,11 @@
         <form name="login" action="${pageContext.request.contextPath}/login" method="post">
             <label>
                 <fmt:message bundle="${i18n}" key="label.login"/>
-                <input id="email" type="email" name="email" placeholder="E-mail" pattern=".*[@].*[.].*"/>
+                <input id="email" type="email" name="email" placeholder="E-mail" pattern=".*[@].*[.].*" required/>
             </label>
             <label>
                 <fmt:message bundle="${i18n}" key="label.password"/>
-                <input id="password" type="password" name="password" placeholder="Password"/>
+                <input id="password" type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required/>
             </label>
             <input type="submit" value="Login">
             <input id="admin-credential" type="button" value="Admin Credential"/>
@@ -46,5 +43,4 @@
     <p>${messages.wrongEmail}</p>
 </div>
 </body>
-
 </html>

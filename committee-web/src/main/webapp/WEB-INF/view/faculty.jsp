@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <%@include file="fragment/resources.jsp" %>
+    <%@include file="fragment/i18n.jsp" %>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/faculty.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/edit.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/error.css">
     <script async src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
     <script async src="${pageContext.request.contextPath}/resources/js/faculty.js"></script>
-    <%@include file="fragment/i18n.jsp" %>
     <title><fmt:message bundle="${i18n}" key="page.faculty"/></title>
 </head>
 <body>

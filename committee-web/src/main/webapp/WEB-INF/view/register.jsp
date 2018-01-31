@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <%@include file="fragment/resources.jsp" %>
+    <%@include file="fragment/i18n.jsp" %>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/background.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/error.css">
     <script async src="${pageContext.request.contextPath}/resources/js/register.js"></script>
-    <%@include file="fragment/i18n.jsp" %>
     <title><fmt:message bundle="${i18n}" key="page.register"/></title>
 </head>
 <body>
@@ -26,9 +25,6 @@
             <label for="email">
                 <fmt:message bundle="${i18n}" key="label.email"/>
                 <input type="email" placeholder="Email" pattern=".*[@].*[.].*" name="email" id="email" required/>
-                <span data-error="${not empty duplicatedEmail}" class="error-msg">
-                    ${duplicatedEmail}
-                </span>
             </label>
             <label for="password">
                 <fmt:message bundle="${i18n}" key="label.password"/>

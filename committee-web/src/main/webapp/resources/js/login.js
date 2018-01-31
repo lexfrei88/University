@@ -1,8 +1,7 @@
 function getErrorMsg() {
     var errorMsg = document.getElementById("tooltip");
     var text = errorMsg.innerText;
-    if (!text || /^\s*$/.test(text)) {
-    } else {
+    if (/\S/.test(text)) {
         errorMsg.style.display = "block";
     }
 }

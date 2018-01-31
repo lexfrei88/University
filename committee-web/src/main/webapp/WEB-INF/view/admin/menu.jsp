@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <%@include file="../fragment/resources.jsp" %>
+    <%@ include file="../fragment/i18n.jsp" %>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/table.css">
-    <%@include file="../fragment/i18n.jsp" %>
-    <title><fmt:message bundle="${i18n}" key="page.admin"/></title>
+    <title><fmt:message bundle="${i18n}" key="page.approve"/></title>
 </head>
 <body>
 <%@ include file="../fragment/header.jsp" %>
